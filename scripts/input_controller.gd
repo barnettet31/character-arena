@@ -11,7 +11,7 @@ func _ready():
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)	
 
 func _on_joy_connection_changed(device_id:int, connected: bool):
-	if connected: 
+	if connected and not has_locked: 
 		has_locked = true
 		locked_device_id = device_id
 		current_input_device = InputController.Controller
@@ -21,7 +21,7 @@ func _on_joy_connection_changed(device_id:int, connected: bool):
 
 func _try_lock_controller():
 	var connected_joypads = Input.get_connected_joypads()
-	if connected_joypads.size()>0:
+	if connected_joypads.size() > 0:
 		locked_device_id = connected_joypads[0]
 		has_locked = true
 		
