@@ -1,20 +1,19 @@
 extends CharacterBody2D
 
+@onready var animations = $player_animation
+@onready var state_machine = $state_machine
+var direction: String = 'down'
+func _ready() -> void:
+	state_machine.init(self, animations)
+
+func _unhandled_input(event: InputEvent) -> void:
+	state_machine.process_input(event)
+
 
 func _physics_process(delta: float) -> void:
-	handle_movement(delta)
-	handle_animation()
-	
-func handle_movement(d: float):
-	if input_controller.current_input_device == input_controller.InputController.Controller:
-		_handle_controller_input()
-	else:
-		_handle_computer_input()
-		
-func handle_animation():
-	pass
+	state_machine.process_physics(delta)
+	animations.is_playing()
 
-func _handle_controller_input():
-	print("handling controller inputs")
-func _handle_computer_input():
-	print("handling computer inputs")
+func _process(delta: float) -> void:
+	if state_machine:
+		state_machine.process_frame(delta)

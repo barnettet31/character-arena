@@ -1,4 +1,4 @@
-[gd_scene load_steps=130 format=3 uid="uid://1l55qaj138dh"]
+[gd_scene load_steps=133 format=3 uid="uid://1l55qaj138dh"]
 
 [ext_resource type="Script" uid="uid://bl8n5t7dgtuho" path="res://scripts/player.gd" id="1_3wg1y"]
 [ext_resource type="Texture2D" uid="uid://bfthtatqsypnh" path="res://assets/characters/Pierce_Down-Sheet.png" id="2_kmyvj"]
@@ -19,6 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://d2aur3cqbor2n" path="res://assets/characters/Walk_Down-Sheet.png" id="17_6rclf"]
 [ext_resource type="Texture2D" uid="uid://cc8563omdh1wv" path="res://assets/characters/Walk_Side-Sheet.png" id="18_s0anf"]
 [ext_resource type="Texture2D" uid="uid://cjwjmpymy23uj" path="res://assets/characters/Walk_Up-Sheet.png" id="19_s1x7u"]
+[ext_resource type="Script" uid="uid://bucisfvyk8dwr" path="res://scripts/state_machine/attack.gd" id="20_8y75b"]
+[ext_resource type="Script" uid="uid://cjyp24lxe4idp" path="res://scripts/state_machine/state_machine.gd" id="20_bxwvg"]
+[ext_resource type="Script" uid="uid://crgrosn022cdy" path="res://scripts/state_machine/idle.gd" id="25_j8rto"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tts5y"]
 atlas = ExtResource("2_kmyvj")
@@ -479,7 +482,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l8wfg")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_down",
 "speed": 11.0
 }, {
@@ -508,7 +511,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8w8he")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_side",
 "speed": 11.0
 }, {
@@ -537,7 +540,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g8k1g")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_up",
 "speed": 11.0
 }, {
@@ -879,9 +882,22 @@ script = ExtResource("1_3wg1y")
 [node name="player_animation" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_85oyr")
-animation = &"collect_up"
-frame_progress = 0.98716146
+animation = &"attack_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9)
 shape = SubResource("CapsuleShape2D_c3kfx")
+
+[node name="state_machine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("20_bxwvg")
+starting_state = NodePath("idle")
+
+[node name="attack" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("20_8y75b")
+idle_state = NodePath("../idle")
+animation_name = "attack"
+
+[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("attack_state")]
+script = ExtResource("25_j8rto")
+attack_state = NodePath("../attack")
+animation_name = "idle"
