@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=3 uid="uid://1l55qaj138dh"]
+[gd_scene load_steps=135 format=3 uid="uid://1l55qaj138dh"]
 
 [ext_resource type="Script" uid="uid://bl8n5t7dgtuho" path="res://scripts/player.gd" id="1_3wg1y"]
 [ext_resource type="Texture2D" uid="uid://bfthtatqsypnh" path="res://assets/characters/Pierce_Down-Sheet.png" id="2_kmyvj"]
@@ -21,6 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://cjwjmpymy23uj" path="res://assets/characters/Walk_Up-Sheet.png" id="19_s1x7u"]
 [ext_resource type="Script" uid="uid://bucisfvyk8dwr" path="res://scripts/state_machine/attack.gd" id="20_8y75b"]
 [ext_resource type="Script" uid="uid://cjyp24lxe4idp" path="res://scripts/state_machine/state_machine.gd" id="20_bxwvg"]
+[ext_resource type="Script" uid="uid://c4u24vv4ehy3h" path="res://scripts/state_machine/move.gd" id="23_d73qs"]
+[ext_resource type="Script" uid="uid://dn3opdhhihd5y" path="res://scripts/state_machine/run.gd" id="24_u6wme"]
 [ext_resource type="Script" uid="uid://crgrosn022cdy" path="res://scripts/state_machine/idle.gd" id="25_j8rto"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tts5y"]
@@ -882,7 +884,7 @@ script = ExtResource("1_3wg1y")
 [node name="player_animation" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_85oyr")
-animation = &"attack_up"
+animation = &"run_side"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9)
@@ -892,12 +894,29 @@ shape = SubResource("CapsuleShape2D_c3kfx")
 script = ExtResource("20_bxwvg")
 starting_state = NodePath("idle")
 
-[node name="attack" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state")]
+[node name="attack" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "run_state", "move_state")]
 script = ExtResource("20_8y75b")
 idle_state = NodePath("../idle")
+run_state = NodePath("../run")
+move_state = NodePath("../move")
 animation_name = "attack"
 
-[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("attack_state")]
+[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("attack_state", "move_state", "run_state")]
 script = ExtResource("25_j8rto")
 attack_state = NodePath("../attack")
+move_state = NodePath("../move")
+run_state = NodePath("../move")
 animation_name = "idle"
+
+[node name="move" type="Node" parent="state_machine" node_paths=PackedStringArray("run_state", "idle_state", "attack_state")]
+script = ExtResource("23_d73qs")
+run_state = NodePath("../run")
+idle_state = NodePath("../idle")
+attack_state = NodePath("../attack")
+animation_name = "idle"
+
+[node name="run" type="Node" parent="state_machine" node_paths=PackedStringArray("move_state", "idle_state", "attack_state")]
+script = ExtResource("24_u6wme")
+move_state = NodePath("../move")
+idle_state = NodePath("../idle")
+attack_state = NodePath("../attack")
