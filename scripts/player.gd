@@ -2,7 +2,13 @@ extends CharacterBody2D
 
 @onready var animations = $player_animation
 @onready var state_machine = $state_machine
-var direction: String = 'down'
+enum  DIRECTION {
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+}
+var direction: DIRECTION = DIRECTION.DOWN
 func _ready() -> void:
 	state_machine.init(self, animations)
 

@@ -2,7 +2,8 @@ extends State
 @export var run_state: State
 @export var idle_state: State
 @export var attack_state: State
-
+func enter()->void:
+	print("Enter move state")
 func process_input(event:InputEvent) -> State:
 	if Input.is_action_pressed("run_left") or Input.is_action_pressed("run_right") or Input.is_action_pressed("run_up") or Input.is_action_pressed('run_down'):
 		return run_state
@@ -18,14 +19,20 @@ func process_physics(delta:float) -> State:
 	play_animation(direction)
 	return null
 func play_animation(direction: Vector2):
+	if direction == Vector2.ZERO:
+		return
 	if direction.y == -1: 
+		parent.direction = parent.DIRECTION.UP
 		parent.animations.play('walk_up')
 	if direction.y == 1: 
+		parent.direction = parent.DIRECTION.DOWN
 		parent.animations.play('walk_down')
 	if direction.x == 1:
+		parent.direction = parent.DIRECTION.LEFT
 		parent.animations.flip_h = false
 		parent.animations.play('walk_side')
 	if direction.x == -1:
+		parent.direction = parent.DIRECTION.RIGHT
 		parent.animations.flip_h = true
 		parent.animations.play('walk_side')
 	

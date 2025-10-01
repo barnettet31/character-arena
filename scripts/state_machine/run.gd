@@ -21,12 +21,16 @@ func process_physics(delta:float) -> State:
 func play_animation(direction: Vector2):
 	
 	if direction.y == -1: 
+		parent.direction = parent.DIRECTION.UP
 		parent.animations.play('run_up')
 	if direction.y == 1: 
+		parent.direction = parent.DIRECTION.DOWN
 		parent.animations.play('run_down')
 	if direction.x == 1:
+		parent.direction = parent.DIRECTION.LEFT
 		parent.animations.flip_h = false
 		parent.animations.play('run_side')
 	if direction.x == -1:
+		parent.direction = parent.DIRECTION.RIGHT
 		parent.animations.flip_h = true
 		parent.animations.play('run_side')

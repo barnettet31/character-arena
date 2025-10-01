@@ -486,7 +486,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_down",
-"speed": 11.0
+"speed": 16.5
 }, {
 "frames": [{
 "duration": 1.0,
@@ -515,7 +515,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_side",
-"speed": 11.0
+"speed": 16.5
 }, {
 "frames": [{
 "duration": 1.0,
@@ -544,7 +544,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_up",
-"speed": 11.0
+"speed": 16.5
 }, {
 "frames": [{
 "duration": 1.0,
@@ -884,7 +884,7 @@ script = ExtResource("1_3wg1y")
 [node name="player_animation" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_85oyr")
-animation = &"run_side"
+animation = &"attack_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9)
@@ -894,11 +894,12 @@ shape = SubResource("CapsuleShape2D_c3kfx")
 script = ExtResource("20_bxwvg")
 starting_state = NodePath("idle")
 
-[node name="attack" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "run_state", "move_state")]
+[node name="attack" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "run_state", "move_state", "state_machine")]
 script = ExtResource("20_8y75b")
 idle_state = NodePath("../idle")
 run_state = NodePath("../run")
 move_state = NodePath("../move")
+state_machine = NodePath("..")
 animation_name = "attack"
 
 [node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("attack_state", "move_state", "run_state")]

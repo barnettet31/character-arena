@@ -7,6 +7,7 @@ func init(parent: CharacterBody2D, animations: AnimatedSprite2D) -> void:
 		child.animations = animations
 	change_state(starting_state)
 func change_state(new: State) -> void:
+	print(new)
 	if current_state:
 		current_state.exit()
 	current_state = new
