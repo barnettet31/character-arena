@@ -879,15 +879,19 @@ radius = 6.0
 height = 22.0
 
 [node name="player" type="CharacterBody2D"]
+z_as_relative = false
+y_sort_enabled = true
 script = ExtResource("1_3wg1y")
 
 [node name="player_animation" type="AnimatedSprite2D" parent="."]
+z_index = 1
 y_sort_enabled = true
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_85oyr")
 animation = &"attack_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
 position = Vector2(0, -9)
 shape = SubResource("CapsuleShape2D_c3kfx")
 
