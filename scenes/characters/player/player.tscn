@@ -882,6 +882,7 @@ height = 22.0
 script = ExtResource("1_3wg1y")
 
 [node name="player_animation" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_85oyr")
 animation = &"attack_up"
