@@ -926,3 +926,6 @@ script = ExtResource("24_u6wme")
 move_state = NodePath("../move")
 idle_state = NodePath("../idle")
 attack_state = NodePath("../attack")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
