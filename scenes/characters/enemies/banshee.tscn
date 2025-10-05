@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://duj4stotyju7i"]
+
+[ext_resource type="PackedScene" uid="uid://3am3l4vvkrkq" path="res://scenes/characters/enemies/enemy.tscn" id="1_ec2dr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ut05h"]
+
+[node name="enemy" instance=ExtResource("1_ec2dr")]
+
+[node name="animation" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_ut05h")
+animation = &"default"
+autoplay = ""

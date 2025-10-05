@@ -179,11 +179,24 @@ y_sort_enabled = true
 script = ExtResource("1_ihb4b")
 
 [node name="animation" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -1)
+position = Vector2(0, -29)
 sprite_frames = SubResource("SpriteFrames_ksqmq")
-animation = &"idle"
+animation = &"hit"
 autoplay = "idle"
+frame_progress = 0.19837396
 
 [node name="collision" type="CollisionShape2D" parent="."]
-position = Vector2(1, 15)
+position = Vector2(0, -12)
 shape = SubResource("CapsuleShape2D_qj54i")
+
+[node name="line_of_sight" type="RayCast2D" parent="."]
+position = Vector2(2, -20)
+target_position = Vector2(89, -1)
+
+[node name="pursuit_navigation" type="NavigationAgent2D" parent="."]
+path_desired_distance = 3.0
+target_desired_distance = 3.0
+navigation_layers = 257
+path_postprocessing = 1
+avoidance_enabled = true
+debug_enabled = true

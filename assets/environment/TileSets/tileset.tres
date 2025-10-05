@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=29 format=3 uid="uid://c43nf73kw48mq"]
+[gd_resource type="TileSet" load_steps=31 format=3 uid="uid://c43nf73kw48mq"]
 
 [ext_resource type="Texture2D" uid="uid://iylh67pnn05r" path="res://assets/environment/TileSets/Floor.png" id="1_pqd5c"]
 [ext_resource type="Texture2D" uid="uid://byxwaogw015fy" path="res://assets/environment/TileSets/Tiles.png" id="2_0ukq7"]
@@ -40,6 +40,18 @@ tile_data = PackedInt32Array(0, 2, 4, 65536, 2, 5)
 [sub_resource type="TileMapPattern" id="TileMapPattern_wd4lv"]
 tile_data = PackedInt32Array(0, 65538, 4, 65536, 65538, 5)
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_pqd5c"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_0ukq7"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_odrvt"]
 texture = ExtResource("1_pqd5c")
 1:0/0 = 0
@@ -74,8 +86,11 @@ texture = ExtResource("1_pqd5c")
 4:6/0 = 0
 0:7/0 = 0
 1:7/0 = 0
+1:7/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_0ukq7")
 2:7/0 = 0
+2:7/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_0ukq7")
 3:7/0 = 0
+3:7/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_0ukq7")
 4:7/0 = 0
 0:8/0 = 0
 1:8/0 = 0
@@ -86,8 +101,11 @@ texture = ExtResource("1_pqd5c")
 2:9/0 = 0
 3:9/0 = 0
 1:10/0 = 0
+1:10/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pqd5c")
 2:10/0 = 0
+2:10/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pqd5c")
 3:10/0 = 0
+3:10/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_pqd5c")
 1:11/0 = 0
 2:11/0 = 0
 3:11/0 = 0
@@ -1407,6 +1425,7 @@ texture = ExtResource("9_y66my")
 4:29/0/y_sort_origin = 1
 
 [resource]
+navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_odrvt")
 sources/1 = SubResource("TileSetAtlasSource_2w2k0")
 sources/2 = SubResource("TileSetAtlasSource_g7xws")

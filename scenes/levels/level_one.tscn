@@ -16,20 +16,24 @@ tile_map_data = PackedByteArray("AAABAAEAAAACAAcAAAABAAMAAAACAAcAAAABAAQAAAACAAc
 tile_set = ExtResource("1_t47ln")
 
 [node name="Walls" type="TileMapLayer" parent="."]
+visible = false
 position = Vector2(102, -35)
 tile_set = ExtResource("1_t47ln")
 
 [node name="Props" type="TileMapLayer" parent="."]
+visible = false
 y_sort_enabled = true
 position = Vector2(102, -35)
 tile_set = ExtResource("1_t47ln")
 
 [node name="Buildings" type="TileMapLayer" parent="."]
+visible = false
 y_sort_enabled = true
 position = Vector2(102, -35)
 tile_set = ExtResource("1_t47ln")
 
 [node name="Spikes" type="TileMapLayer" parent="."]
+visible = false
 z_index = 2
 y_sort_enabled = true
 position = Vector2(102, -35)
