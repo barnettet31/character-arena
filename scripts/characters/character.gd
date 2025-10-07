@@ -1,6 +1,7 @@
+class_name Character
 extends CharacterBody2D
 
-@onready var animations = $player_animation
+@onready var animations = $animation
 @onready var state_machine = $state_machine
 enum  DIRECTION {
 	UP,
@@ -12,14 +13,12 @@ var direction: DIRECTION = DIRECTION.DOWN
 func _ready() -> void:
 	state_machine.init(self, animations)
 
-func _unhandled_input(event: InputEvent) -> void:
-	state_machine.process_input(event)
+func _handle_change_event(event) -> void:
+	pass
 
 
 func _physics_process(delta: float) -> void:
 	state_machine.process_physics(delta)
-	animations.is_playing()
-
 func _process(delta: float) -> void:
 	if state_machine:
 		state_machine.process_frame(delta)
