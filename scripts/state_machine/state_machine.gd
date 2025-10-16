@@ -2,8 +2,10 @@ extends Node
 @export var starting_state: State
 var current_state: State 
 func init(parent: CharacterBody2D, animations: AnimatedSprite2D) -> void:
+	print(parent)
 	for child in get_children():
 		child.parent = parent
+		print("parent: ", parent)
 		child.animations = animations
 	change_state(starting_state)
 func change_state(new: State) -> void:

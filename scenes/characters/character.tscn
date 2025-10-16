@@ -1,14 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://kb1xsulou2wv"]
+[gd_scene load_steps=5 format=3 uid="uid://kb1xsulou2wv"]
 
 [ext_resource type="Script" uid="uid://b3y1tuh0bvkak" path="res://scripts/characters/character.gd" id="1_1bdar"]
+[ext_resource type="SpriteFrames" uid="uid://b2cten5t03ilp" path="res://assets/characters/player/player.tres" id="2_2qjml"]
 [ext_resource type="Script" uid="uid://cjyp24lxe4idp" path="res://scripts/state_machine/state_machine.gd" id="2_e22cc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ma1fs"]
+radius = 7.0
+height = 26.0
 
 [node name="character" type="CharacterBody2D"]
 script = ExtResource("1_1bdar")
 
 [node name="animation" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, -15)
+sprite_frames = ExtResource("2_2qjml")
+animation = &"attack_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+shape = SubResource("CapsuleShape2D_ma1fs")
 
 [node name="state_machine" type="Node" parent="."]
 script = ExtResource("2_e22cc")

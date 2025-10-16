@@ -1,11 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhua8tj71q34m"]
+[gd_scene load_steps=4 format=3 uid="uid://dhua8tj71q34m"]
 
 [ext_resource type="PackedScene" uid="uid://urehgo1dcjch" path="res://scenes/levels/level_one.tscn" id="1_72ix8"]
 [ext_resource type="PackedScene" uid="uid://pwd67uf3hejd" path="res://scenes/characters/player/player.tscn" id="3_j4d2a"]
+[ext_resource type="PackedScene" uid="uid://3am3l4vvkrkq" path="res://scenes/characters/enemies/enemy.tscn" id="3_y0acb"]
 
 [node name="Main" type="Node2D"]
 
 [node name="BasicArena" parent="." instance=ExtResource("1_72ix8")]
 
 [node name="player" parent="." instance=ExtResource("3_j4d2a")]
-position = Vector2(24, 15)
+position = Vector2(460, 333)
+
+[node name="character" parent="." instance=ExtResource("3_y0acb")]
+position = Vector2(666, 342)

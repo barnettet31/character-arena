@@ -11,6 +11,7 @@ enum  DIRECTION {
 }
 var direction: DIRECTION = DIRECTION.DOWN
 func _ready() -> void:
+	print("called:", self)
 	state_machine.init(self, animations)
 
 func _handle_change_event(event) -> void:

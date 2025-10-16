@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://pwd67uf3hejd"]
+[gd_scene load_steps=8 format=3 uid="uid://pwd67uf3hejd"]
 
 [ext_resource type="PackedScene" uid="uid://kb1xsulou2wv" path="res://scenes/characters/character.tscn" id="1_cpx1t"]
 [ext_resource type="Script" uid="uid://byfm3bsn654nl" path="res://scripts/characters/player.gd" id="2_lxite"]
-[ext_resource type="SpriteFrames" uid="uid://b2cten5t03ilp" path="res://assets/characters/player/player.tres" id="20_tleek"]
 [ext_resource type="Script" uid="uid://bucisfvyk8dwr" path="res://scripts/state_machine/attack.gd" id="21_55t6t"]
 [ext_resource type="Script" uid="uid://crgrosn022cdy" path="res://scripts/state_machine/idle.gd" id="22_34emw"]
 [ext_resource type="Script" uid="uid://c4u24vv4ehy3h" path="res://scripts/state_machine/move.gd" id="23_4fy1m"]
@@ -17,7 +16,6 @@ script = ExtResource("2_lxite")
 
 [node name="animation" parent="." index="0"]
 position = Vector2(0, -16)
-sprite_frames = ExtResource("20_tleek")
 animation = &"idle_down"
 
 [node name="CollisionShape2D" parent="." index="1"]
@@ -56,6 +54,6 @@ idle_state = NodePath("../idle")
 attack_state = NodePath("../attack")
 
 [node name="Camera2D" type="Camera2D" parent="." index="3" groups=["player"]]
-zoom = Vector2(4, 4)
+zoom = Vector2(3, 3)
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
