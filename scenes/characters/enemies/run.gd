@@ -1,13 +1,12 @@
 extends State
-@export var run:State 
-func _ready() -> void:
-	pass
+@export var idle:State
+
 func enter():
 	super()
 	animations.play(animation_name)
 
 func process_frame(delta:float) -> State:
 	if parent.player == null:
-		return null
+		return idle
 	else: 
-		return run
+		return null

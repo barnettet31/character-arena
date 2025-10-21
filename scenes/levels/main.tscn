@@ -9,7 +9,7 @@
 [node name="BasicArena" parent="." instance=ExtResource("1_72ix8")]
 
 [node name="player" parent="." instance=ExtResource("3_j4d2a")]
-position = Vector2(460, 333)
+position = Vector2(717, 64)
 
 [node name="character" parent="." instance=ExtResource("3_y0acb")]
-position = Vector2(666, 342)
+position = Vector2(481, 224)

@@ -1,7 +1,7 @@
 class_name Character
 extends CharacterBody2D
 
-@onready var animations = $animation
+@onready var animations: AnimatedSprite2D = $animation
 @onready var state_machine = $state_machine
 enum  DIRECTION {
 	UP,
@@ -11,7 +11,6 @@ enum  DIRECTION {
 }
 var direction: DIRECTION = DIRECTION.DOWN
 func _ready() -> void:
-	print("called:", self)
 	state_machine.init(self, animations)
 
 func _handle_change_event(event) -> void:

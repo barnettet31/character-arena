@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://3am3l4vvkrkq"]
+[gd_scene load_steps=30 format=3 uid="uid://3am3l4vvkrkq"]
 
 [ext_resource type="PackedScene" uid="uid://kb1xsulou2wv" path="res://scenes/characters/character.tscn" id="1_ihb4b"]
 [ext_resource type="Texture2D" uid="uid://bpbu4bdkwkutn" path="res://assets/characters/mobs/zombie/Death-Sheet.png" id="1_qj54i"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cao38h5f6hx8b" path="res://assets/characters/mobs/zombie/Hit-Sheet.png" id="2_ihb4b"]
 [ext_resource type="Texture2D" uid="uid://cxnlap4i1rq1f" path="res://assets/characters/mobs/zombie/Run-Sheet.png" id="4_ksqmq"]
 [ext_resource type="Script" uid="uid://cj87g18etlv03" path="res://scenes/characters/enemies/idle.gd" id="7_mxrkf"]
+[ext_resource type="Script" uid="uid://cv0kc1mmrq6tv" path="res://scenes/characters/enemies/run.gd" id="8_mxrkf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ksqmq"]
 atlas = ExtResource("1_qj54i")
@@ -182,6 +183,30 @@ animation = &"idle"
 [node name="state_machine" parent="." index="2" node_paths=PackedStringArray("starting_state")]
 starting_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="state_machine" index="0"]
+[node name="idle" type="Node" parent="state_machine" index="0" node_paths=PackedStringArray("run")]
 script = ExtResource("7_mxrkf")
+run = NodePath("../run")
 animation_name = "idle"
+
+[node name="run" type="Node" parent="state_machine" index="1" node_paths=PackedStringArray("idle")]
+script = ExtResource("8_mxrkf")
+idle = NodePath("../idle")
+animation_name = "run"
+
+[node name="field_of_vision" type="Area2D" parent="." index="3"]
+position = Vector2(-2, 5)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="field_of_vision" index="0"]
+position = Vector2(2, -26)
+polygon = PackedVector2Array(0, 0, 0, 0, 220, -152, 220, 112)
+
+[node name="raycast" type="RayCast2D" parent="." index="4"]
+position = Vector2(0, -14)
+target_position = Vector2(167, 0)
+
+[node name="timer" type="Timer" parent="." index="5"]
+wait_time = 0.12
+
+[connection signal="body_entered" from="field_of_vision" to="." method="_on_active_zone_body_entered"]
+[connection signal="body_exited" from="field_of_vision" to="." method="_on_field_of_vision_body_exited"]
+[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
