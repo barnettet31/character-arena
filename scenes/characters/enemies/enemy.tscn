@@ -202,7 +202,8 @@ polygon = PackedVector2Array(0, 0, 0, 0, 220, -152, 220, 112)
 
 [node name="raycast" type="RayCast2D" parent="." index="4"]
 position = Vector2(0, -14)
-target_position = Vector2(167, 0)
+target_position = Vector2(220, 1)
+collision_mask = 3
 
 [node name="timer" type="Timer" parent="." index="5"]
 wait_time = 0.12

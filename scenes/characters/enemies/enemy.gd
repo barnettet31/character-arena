@@ -1,17 +1,14 @@
 extends Character
 @onready var raycast: RayCast2D = $raycast 
 @onready var timer: Timer = $timer
-var player: Player
 @onready var ray_cast_initial = $raycast.target_position
+var player: Player
+var colliding_with_player: bool = false
+var move_target: Vector2
 func _physics_process(delta: float) -> void:
-	if raycast.is_colliding():
-		var object = raycast.get_collider()
-		if object.has_method('_is_player'):
-			#player is in vision, pursue
-			pass
-		else: 
-			#player not in vision do idle
-			pass
+		colliding_with_player = _check_line_of_sight()
+		if colliding_with_player: 
+			move_target = raycast.target_position.normalized()
 func _on_active_zone_body_entered(body: Node2D) -> void:
 	if body.is_in_group('player'):
 		player = body
@@ -20,7 +17,19 @@ func _on_active_zone_body_entered(body: Node2D) -> void:
 		## handle state
 
 		
-
+func _check_line_of_sight()->bool:
+		if player == null:
+			return false
+		var space_state = get_world_2d().direct_space_state
+		var query = PhysicsRayQueryParameters2D.create(raycast.global_position, player.calculate_middle_point())
+		query.collision_mask = 3
+		query.collide_with_bodies = true
+		query.collide_with_areas = false
+		var result = space_state.intersect_ray(query)
+		if result.is_empty():
+			return false
+		return result.collider == player or result.collider.has_method('is_player')
+	
 func _update_raycast():
 	if player == null: 
 		raycast.target_position = ray_cast_initial
